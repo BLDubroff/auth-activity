@@ -2,10 +2,17 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
+const { authenticate } = require('../middlewares/auth')
 
 router.get('/', async(req, res) =>{
     const users = await User.find()
     res.json(users)
+})
+
+// mock create comment
+router.post('/comment', authenticate, async(req, res) => {
+    // create comment here
+    res.send('complete')
 })
 
 router.post('/', async(req, res)=>{
